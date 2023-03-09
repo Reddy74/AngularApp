@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = "670166063118.dkr.ecr.us-east-1.amazonaws.com/angularapp"
         ECS_CLUSTER_NAME = "rnr-ecs"
-        AWS_REGION = "ap-south-2"
+        AWS_REGION = "us-east-1"
     }
     stages {
         stage('Fetch source code') {
