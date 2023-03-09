@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = "670166063118.dkr.ecr.us-east-1.amazonaws.com/angularapp"
-        EKS_CLUSTER_NAME = "rnr-eks"
+        ECS_CLUSTER_NAME = "rnr-ecs"
         AWS_REGION = "ap-south-2"
     }
     stages {
