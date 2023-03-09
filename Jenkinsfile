@@ -19,7 +19,7 @@ pipeline {
         stage('Push Docker image to registry') {
             steps {
 
-                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS    --password-stdin 670166063118.dkr.ecr.us-east-1.amazonaws.com"
+                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 670166063118.dkr.ecr.us-east-1.amazonaws.com"
                   sh  " docker tag angularapp:latest 670166063118.dkr.ecr.us-east-1.amazonaws.com/angularapp:latest"
                     sh " docker push 670166063118.dkr.ecr.us-east-1.amazonaws.com/angularapp:latest"
                 }
