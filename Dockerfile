@@ -3,19 +3,13 @@ WORKDIR /usr/src/app
 COPY my-app/ ./my-app/
 RUN cd my-app && npm install @angular/cli && npm install && npm run build
 
+FROM node:10 AS server-build
+WORKDIR /root/
+COPY --from=ui-build /usr/src/app/my-app/dist ./my-app/dist
+COPY package*.json ./
+RUN npm install
+COPY server.js .
 
-FROM nginx:alpine
+EXPOSE 3080
 
-#!/bin/sh
-
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
-
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy from the stahg 1
-COPY --from=ui-build /usr/src/app/my-app/dist/angular-nodejs-example/ /usr/share/nginx/html
-
-EXPOSE 4200 80
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
